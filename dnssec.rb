@@ -105,9 +105,9 @@ class DNSSec
 
       safe_exec "cd #{ZONE_PATH} && cp #{domain}.signed #{domain}"
       safe_exec "/sbin/service named reload"
-      `(echo "Subject: DNSSEC #{domain} geactiveerd";echo "From: info@lico.nl";echo "To: info@lico.nl";echo "DNSSEC voor #{domain} is geactiveerd... Gaarne even controleren op http://dnscheck.sidn.nl/ :)")|/usr/sbin/sendmail -t`
+      # `(echo "Subject: DNSSEC #{domain} geactiveerd";echo "From: info@lico.nl";echo "To: info@lico.nl";echo "DNSSEC voor #{domain} is geactiveerd... Gaarne even controleren op http://dnscheck.sidn.nl/ :)")|/usr/sbin/sendmail -t`
     rescue
-      `(echo "Subject: DNSSEC #{domain} mislukt";echo "From: info@lico.nl";echo "To: info@lico.nl";echo "DNSSEC voor #{domain} is mislukt!... Mogelijke info in: /var/log/dnssec.log")|/usr/sbin/sendmail -t`
+      # `(echo "Subject: DNSSEC #{domain} mislukt";echo "From: info@lico.nl";echo "To: info@lico.nl";echo "DNSSEC voor #{domain} is mislukt!... Mogelijke info in: /var/log/dnssec.log")|/usr/sbin/sendmail -t`
       safe_exec "cd #{ZONE_PATH} && cp #{domain}.saved #{domain}"
       if new_keys
         `cd #{DNSSEC_PATH}/ && rm -rf K#{domain}.*`
